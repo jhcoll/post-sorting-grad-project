@@ -6,17 +6,15 @@ import java.util.Comparator;
 import java.util.List;
 
 public class AuthorPostSorter implements PostSorter {
-
     @Override
     public List<UserPost> sort(List<UserPost> inputList, SortOrder SortOrder) {
-        if (inputList != null) {
-            List<UserPost> copyInputList = new ArrayList<>(inputList);
-            copyInputList.sort(Comparator.comparing(UserPost::getAuthor));
-            if (SortOrder == com.scottlogic.SortOrder.DESC) {
-                copyInputList.sort(Collections.reverseOrder(Comparator.comparing(UserPost::getAuthor)));
-            }
-            return copyInputList;
+        if (inputList == null) {return null;}
+        List<UserPost> outputList = new ArrayList<>(inputList);
+        if (SortOrder == com.scottlogic.SortOrder.DESC) {
+            outputList.sort(Collections.reverseOrder(Comparator.comparing(a -> a.getAuthor().split(" ")[a.getAuthor().split(" ").length - 1])));
+        } else {
+            outputList.sort(Comparator.comparing(a -> a.getAuthor().split(" ")[a.getAuthor().split(" ").length - 1]));
         }
-        return null;
+        return outputList;
     }
 }

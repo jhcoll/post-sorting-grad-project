@@ -10,16 +10,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LikesPostSorterTest {
-    UserPost userPost1 = new UserPost("Joe Bloggs",
+class
+LikesPostSorterTest {
+    UserPost userPost2Likes = new UserPost("Joe Bloggs",
             OffsetDateTime.of(2020, 1, 3, 7, 12, 3, 0, ZoneOffset.UTC),
             "Hello World!", 2);
 
-    UserPost userPost2 = new UserPost("Joe Bloggs",
+    UserPost userPost1Likes = new UserPost("Joe Bloggs",
             OffsetDateTime.of(2020, 1, 3, 8, 53, 34, 0, ZoneOffset.UTC),
             "Another example post.", 1);
 
-    UserPost userPost3 = new UserPost("Jane Smith",
+    UserPost userPost3Likes = new UserPost("Jane Smith",
             OffsetDateTime.of(2020, 3, 12, 13, 22, 12, 0, ZoneOffset.UTC),
             "An example of a post \nwith lines breaks.", 3);
 
@@ -42,8 +43,8 @@ class LikesPostSorterTest {
 
     @Test
     void sort_1ItemList_1ItemList() {
-        List<UserPost> inputList = List.of(userPost1);
-        List<UserPost> expected = List.of(userPost1);
+        List<UserPost> inputList = List.of(userPost1Likes);
+        List<UserPost> expected = List.of(userPost1Likes);
 
         List<UserPost> actual = new LikesPostSorter().sort(inputList, SortOrder.ASC);
 
@@ -52,8 +53,8 @@ class LikesPostSorterTest {
 
     @Test
     void sort_unsorted3Items_sorted3Items() {
-        List<UserPost> inputList = Arrays.asList(userPost1, userPost2, userPost3);
-        List<UserPost> expected = Arrays.asList(userPost2, userPost1, userPost3);
+        List<UserPost> inputList = Arrays.asList(userPost3Likes, userPost1Likes, userPost2Likes);
+        List<UserPost> expected = Arrays.asList(userPost1Likes, userPost2Likes, userPost3Likes);
 
         List<UserPost> actual = new LikesPostSorter().sort(inputList, SortOrder.ASC);
 
@@ -62,8 +63,8 @@ class LikesPostSorterTest {
 
     @Test
     void sort_unsorted3ItemsDESC_sorted3ItemsDESC() {
-        List<UserPost> inputList = Arrays.asList(userPost1, userPost2, userPost3);
-        List<UserPost> expected = Arrays.asList(userPost3, userPost1, userPost2);
+        List<UserPost> inputList = Arrays.asList(userPost1Likes, userPost2Likes, userPost3Likes);
+        List<UserPost> expected = Arrays.asList(userPost3Likes, userPost2Likes, userPost1Likes);
 
         List<UserPost> actual = new LikesPostSorter().sort(inputList, SortOrder.DESC);
 
@@ -72,19 +73,19 @@ class LikesPostSorterTest {
 
     @Test
     void sort_unsorted3ItemsSame_sorted3ItemsSame() {
-        UserPost userPost1 = new UserPost("Joe Bloggs",
+        UserPost userPost3Likes = new UserPost("Joe Bloggs",
                 OffsetDateTime.of(2020, 1, 3, 7, 12, 3, 0, ZoneOffset.UTC),
                 "Hello World!", 3);
 
-        UserPost userPost2 = new UserPost("Joe Bloggs",
+        UserPost userPost1Likes = new UserPost("Joe Bloggs",
                 OffsetDateTime.of(2020, 1, 3, 8, 53, 34, 0, ZoneOffset.UTC),
                 "Another example post.", 1);
 
-        UserPost userPost3 = new UserPost("Jane Smith",
+        UserPost userPost1Likes2 = new UserPost("Jane Smith",
                 OffsetDateTime.of(2020, 3, 12, 13, 22, 12, 0, ZoneOffset.UTC),
                 "An example of a post \nwith lines breaks.", 1);
-        List<UserPost> inputList = Arrays.asList(userPost1, userPost2, userPost3);
-        List<UserPost> expected = Arrays.asList(userPost2, userPost3, userPost1);
+        List<UserPost> inputList = Arrays.asList(userPost3Likes, userPost1Likes, userPost1Likes2);
+        List<UserPost> expected = Arrays.asList(userPost1Likes, userPost1Likes2, userPost3Likes);
 
         List<UserPost> actual = new LikesPostSorter().sort(inputList, SortOrder.ASC);
 
@@ -93,19 +94,19 @@ class LikesPostSorterTest {
 
     @Test
     void sort_unsorted3ItemsNoLikes_sorted3ItemsNoLikes() {
-        UserPost userPost1 = new UserPost("Joe Bloggs",
+        UserPost userPost0Likes = new UserPost("Joe Bloggs",
                 OffsetDateTime.of(2020, 1, 3, 7, 12, 3, 0, ZoneOffset.UTC),
                 "Hello World!", 0);
 
-        UserPost userPost2 = new UserPost("Joe Bloggs",
+        UserPost userPost0Likes2 = new UserPost("Joe Bloggs",
                 OffsetDateTime.of(2020, 1, 3, 8, 53, 34, 0, ZoneOffset.UTC),
                 "Another example post.", 0);
 
-        UserPost userPost3 = new UserPost("Jane Smith",
+        UserPost userPost0Likes3 = new UserPost("Jane Smith",
                 OffsetDateTime.of(2020, 3, 12, 13, 22, 12, 0, ZoneOffset.UTC),
                 "An example of a post \nwith lines breaks.", 0);
-        List<UserPost> inputList = Arrays.asList(userPost1, userPost2, userPost3);
-        List<UserPost> expected = Arrays.asList(userPost1, userPost2, userPost3);
+        List<UserPost> inputList = Arrays.asList(userPost0Likes, userPost0Likes2, userPost0Likes3);
+        List<UserPost> expected = Arrays.asList(userPost0Likes, userPost0Likes2, userPost0Likes3);
 
         List<UserPost> actual = new LikesPostSorter().sort(inputList, SortOrder.ASC);
 
