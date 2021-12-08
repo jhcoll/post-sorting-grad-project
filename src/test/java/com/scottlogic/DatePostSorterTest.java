@@ -62,28 +62,6 @@ class DatePostSorterTest {
     }
 
     @Test
-    void sort_unsorted3Lower_sorted3Lower() {
-        UserPost userPost1 = new UserPost("joe bloggs",
-                OffsetDateTime.of(2020, 1, 3, 7, 12, 3, 0, ZoneOffset.UTC),
-                "Hello World!", 2);
-
-        UserPost userPost2 = new UserPost("joe bloggs",
-                OffsetDateTime.of(2020, 1, 3, 8, 53, 34, 0, ZoneOffset.UTC),
-                "Another example post.", 1);
-
-        UserPost userPost3 = new UserPost("jane smith",
-                OffsetDateTime.of(2020, 3, 12, 13, 22, 12, 0, ZoneOffset.UTC),
-                "An example of a post \nwith lines breaks.", 3);
-
-        List<UserPost> inputList = Arrays.asList(userPost1, userPost2, userPost3);
-        List<UserPost> expected = Arrays.asList(userPost1, userPost2, userPost3);
-
-        List<UserPost> actual = new DatePostSorter().sort(inputList, SortOrder.ASC);
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
     void sort_unsorted3ItemsDESC_sorted3ItemsDESC() {
         List<UserPost> inputList = Arrays.asList(userPost1, userPost2, userPost3);
         List<UserPost> expected = Arrays.asList(userPost3, userPost2, userPost1);
@@ -133,6 +111,28 @@ class DatePostSorterTest {
         List<UserPost> expected = Arrays.asList(userPost3, userPost1, userPost2);
 
         List<UserPost> actual = new DatePostSorter().sort(inputList, SortOrder.DESC);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void sort_withSameDateDiffZone_sortedSameDateDiffZone() {
+        UserPost userPost1 = new UserPost("joe bloggs",
+                OffsetDateTime.of(2020, 1, 3, 7, 12, 3, 0, ZoneOffset.of("+1")),
+                "Hello World!", 2);
+
+        UserPost userPost2 = new UserPost("joe bloggs",
+                OffsetDateTime.of(2020, 1, 3, 7, 12, 3, 0, ZoneOffset.of("+2")),
+                "Another example post.", 1);
+
+        UserPost userPost3 = new UserPost("jane smith",
+                OffsetDateTime.of(2020, 3, 12, 13, 22, 12, 0, ZoneOffset.of("+1")),
+                "An example of a post \nwith lines breaks.", 3);
+
+        List<UserPost> inputList = Arrays.asList(userPost1, userPost2, userPost3);
+        List<UserPost> expected = Arrays.asList(userPost2, userPost1, userPost3);
+
+        List<UserPost> actual = new DatePostSorter().sort(inputList, SortOrder.ASC);
 
         assertEquals(expected, actual);
     }
