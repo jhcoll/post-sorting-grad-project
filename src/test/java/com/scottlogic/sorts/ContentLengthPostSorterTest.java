@@ -1,5 +1,8 @@
-package com.scottlogic;
+package com.scottlogic.sorts;
 
+import com.scottlogic.SortOrder;
+import com.scottlogic.UserPost;
+import com.scottlogic.sorts.ContentLengthPostSorter;
 import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;

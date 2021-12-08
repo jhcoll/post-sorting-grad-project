@@ -1,4 +1,8 @@
-package com.scottlogic;
+package com.scottlogic.sorts;
+
+import com.scottlogic.PostSorter;
+import com.scottlogic.SortOrder;
+import com.scottlogic.UserPost;
 
 import java.util.ArrayList;
 import java.util.Collections;
