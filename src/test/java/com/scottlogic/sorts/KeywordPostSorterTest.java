@@ -50,7 +50,7 @@ class KeywordPostSorterTest {
     KeywordPostFilter localKeywordPostFilter = mock(KeywordPostFilter.class);
 
     @Test
-    void filter_null_null() {
+    void sort_null_null() {
         when(localKeywordPostFilter.filter(null)).thenReturn(null);
 
         List<UserPost> actual = new KeywordPostSorter(localKeywordPostFilter).sort(null, SortOrder.ASC);
@@ -59,7 +59,7 @@ class KeywordPostSorterTest {
     }
 
     @Test
-    void filter_EmptyList_EmptyList() {
+    void sort_EmptyList_EmptyList() {
         List<UserPost> inputList = Collections.emptyList();
         List<UserPost> expected = Collections.emptyList();
 
@@ -71,7 +71,7 @@ class KeywordPostSorterTest {
     }
 
     @Test
-    void filter_1ItemKeyword_1ItemList() {
+    void sort_1ItemKeyword_1ItemList() {
         List<UserPost> inputList = List.of(keywords1);
         List<UserPost> expected = List.of(keywords1);
         when(localKeywordPostFilter.filter(inputList)).thenReturn(List.of(keywords1));
@@ -84,7 +84,7 @@ class KeywordPostSorterTest {
 
 
     @Test
-    void combine_3Items3Match_3ItemsList() {
+    void sort_3Items3Match_3ItemsList() {
         List<UserPost> inputList = Arrays.asList(keywords1, keywords2, keywords3);
         List<UserPost> expected = Arrays.asList(keywords3, keywords2, keywords1);
 
