@@ -109,8 +109,8 @@ class AuthorPostFilterTest {
 
     @Test
     void filter_3Items3Match_3Items() {
-        List<UserPost> inputList = Arrays.asList( userPostJoe1, userPostJoe2,userPostJoe3);
-        List<UserPost> expected = Arrays.asList(userPostJoe1, userPostJoe2,userPostJoe3);
+        List<UserPost> inputList = Arrays.asList(userPostJoe1, userPostJoe2, userPostJoe3);
+        List<UserPost> expected = Arrays.asList(userPostJoe1, userPostJoe2, userPostJoe3);
 
         List<UserPost> actual = new AuthorPostFilter("Joe").filter(inputList);
 

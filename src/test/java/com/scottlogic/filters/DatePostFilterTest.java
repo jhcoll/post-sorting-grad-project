@@ -9,7 +9,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class DatePostFilterTest {
 
@@ -118,6 +119,7 @@ class DatePostFilterTest {
 
         assertEquals(expected, actual);
     }
+
     @Test
     void filter_2Items1offSet_1Items() {
         List<UserPost> inputList = Arrays.asList(userPost2020_01_01_0230, userPost2020_01_01_0230_of2);

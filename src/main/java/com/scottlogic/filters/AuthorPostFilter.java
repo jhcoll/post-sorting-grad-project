@@ -20,7 +20,9 @@ public class AuthorPostFilter implements PostFilter {
         if (inputList == null) {
             return null;
         }
-        if(Objects.equals(Author, "")){return new ArrayList<>();}
+        if (Objects.equals(Author, "")) {
+            return new ArrayList<>();
+        }
         List<UserPost> outputList = new ArrayList<>(inputList);
         outputList.removeIf(a -> !a.getAuthor().contains(Author));
         return outputList;

@@ -6,7 +6,6 @@ import com.scottlogic.UserPost;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class DatePostFilter implements PostFilter {
     private final OffsetDateTime startDate;

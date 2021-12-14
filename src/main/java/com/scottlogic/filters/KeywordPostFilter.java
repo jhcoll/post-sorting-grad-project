@@ -15,7 +15,7 @@ public class KeywordPostFilter implements PostFilter {
     }
 
     public KeywordPostFilter(String keywordInput) {
-        if(keywordInput == null){
+        if (keywordInput == null) {
             throw new IllegalArgumentException("keyword input cannot be null");
         }
         this.Keyword = keywordInput.toLowerCase();
@@ -26,7 +26,9 @@ public class KeywordPostFilter implements PostFilter {
         if (inputList == null) {
             return null;
         }
-        if(Objects.equals(Keyword, "")){return new ArrayList<>();}
+        if (Objects.equals(Keyword, "")) {
+            return new ArrayList<>();
+        }
         List<UserPost> outputList = new ArrayList<>(inputList);
         outputList.removeIf(a -> !a.getContents().toLowerCase().contains(Keyword));
         return outputList;
