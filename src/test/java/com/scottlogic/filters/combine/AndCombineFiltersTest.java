@@ -12,7 +12,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -29,13 +30,10 @@ class AndCombineFiltersTest {
             OffsetDateTime.of(2020, 3, 12, 13, 22, 12, 0, ZoneOffset.UTC),
             "An example of a post \nwith lines breaks.", 3);
 
-
     @Mock
     AuthorPostFilter localAuthorPostFilter = mock(AuthorPostFilter.class);
     @Mock
     DatePostFilter localDatePostFilter = mock(DatePostFilter.class);
-
-
 
     @Test
     void filter_null_null() {
@@ -105,8 +103,10 @@ class AndCombineFiltersTest {
         List<UserPost> inputList = Arrays.asList(userPostJane, userPostJoe1, userPostJoe2);
         List<UserPost> expected = List.of(userPostJane, userPostJoe2);
 
-        when(localAuthorPostFilter.filter(inputList)).thenReturn(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2));
-        when(localDatePostFilter.filter(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2))).thenReturn(List.of(userPostJane, userPostJoe2));
+        when(localAuthorPostFilter.filter(inputList))
+                .thenReturn(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2));
+        when(localDatePostFilter.filter(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2)))
+                .thenReturn(List.of(userPostJane, userPostJoe2));
 
         List<UserPost> actual = new AndCombineFilters(localAuthorPostFilter, localDatePostFilter).filter(inputList);
 
@@ -118,8 +118,10 @@ class AndCombineFiltersTest {
         List<UserPost> inputList = Arrays.asList(userPostJane, userPostJoe1, userPostJoe2);
         List<UserPost> expected = Arrays.asList(userPostJane, userPostJoe1, userPostJoe2);
 
-        when(localAuthorPostFilter.filter(inputList)).thenReturn(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2));
-        when(localDatePostFilter.filter(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2))).thenReturn(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2));
+        when(localAuthorPostFilter.filter(inputList))
+                .thenReturn(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2));
+        when(localDatePostFilter.filter(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2)))
+                .thenReturn(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2));
 
         List<UserPost> actual = new AndCombineFilters(localAuthorPostFilter, localDatePostFilter).filter(inputList);
 

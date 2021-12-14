@@ -20,6 +20,5 @@ public class LikesPostSorter implements PostSorter {
             outputList.sort(Comparator.comparing(UserPost::getLikeCount));
         }
         return outputList;
-
     }
 }

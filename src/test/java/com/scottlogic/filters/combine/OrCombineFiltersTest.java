@@ -29,13 +29,10 @@ class OrCombineFiltersTest {
             OffsetDateTime.of(2020, 3, 12, 13, 22, 12, 0, ZoneOffset.UTC),
             "An example of a post \nwith lines breaks.", 3);
 
-
     @Mock
     AuthorPostFilter localAuthorPostFilter = mock(AuthorPostFilter.class);
     @Mock
     DatePostFilter localDatePostFilter = mock(DatePostFilter.class);
-
-
 
     @Test
     void filter_null_null() {
@@ -105,8 +102,10 @@ class OrCombineFiltersTest {
         List<UserPost> inputList = Arrays.asList(userPostJane, userPostJoe1, userPostJoe2);
         List<UserPost> expected = List.of(userPostJane,userPostJoe1, userPostJoe2);
 
-        when(localAuthorPostFilter.filter(inputList)).thenReturn(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2));
-        when(localDatePostFilter.filter(inputList)).thenReturn(List.of(userPostJane, userPostJoe2));
+        when(localAuthorPostFilter.filter(inputList))
+                .thenReturn(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2));
+        when(localDatePostFilter.filter(inputList))
+                .thenReturn(List.of(userPostJane, userPostJoe2));
 
         List<UserPost> actual = new OrCombineFilters(localAuthorPostFilter, localDatePostFilter).filter(inputList);
 
@@ -118,8 +117,10 @@ class OrCombineFiltersTest {
         List<UserPost> inputList = Arrays.asList(userPostJane, userPostJoe1, userPostJoe2);
         List<UserPost> expected = Arrays.asList(userPostJane, userPostJoe1, userPostJoe2);
 
-        when(localAuthorPostFilter.filter(inputList)).thenReturn(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2));
-        when(localDatePostFilter.filter(inputList)).thenReturn(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2));
+        when(localAuthorPostFilter.filter(inputList))
+                .thenReturn(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2));
+        when(localDatePostFilter.filter(inputList))
+                .thenReturn(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2));
 
         List<UserPost> actual = new OrCombineFilters(localAuthorPostFilter, localDatePostFilter).filter(inputList);
 

@@ -14,7 +14,7 @@ public class LikePostFilter implements PostFilter {
             return null;
         }
         List<UserPost> outputList = new ArrayList<>(inputList);
-        outputList.removeIf(a -> !(a.getLikeCount() > 0));
+        outputList.removeIf(a -> (a.getLikeCount() <= 0));
         return outputList;
     }
 }
