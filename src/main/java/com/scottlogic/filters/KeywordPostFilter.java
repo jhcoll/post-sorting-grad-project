@@ -8,17 +8,17 @@ import java.util.List;
 import java.util.Objects;
 
 public class KeywordPostFilter implements PostFilter {
-    private final String Keyword;
+    private final String keyword;
 
     public String getKeyword() {
-        return Keyword;
+        return keyword;
     }
 
     public KeywordPostFilter(String keywordInput) {
         if (keywordInput == null) {
             throw new IllegalArgumentException("keyword input cannot be null");
         }
-        this.Keyword = keywordInput.toLowerCase();
+        this.keyword = keywordInput.toLowerCase();
     }
 
     @Override
@@ -26,11 +26,11 @@ public class KeywordPostFilter implements PostFilter {
         if (inputList == null) {
             return null;
         }
-        if (Objects.equals(Keyword, "")) {
+        if (Objects.equals(keyword, "")) {
             return new ArrayList<>();
         }
         List<UserPost> outputList = new ArrayList<>(inputList);
-        outputList.removeIf(a -> !a.getContents().toLowerCase().contains(Keyword));
+        outputList.removeIf(a -> !a.getContents().toLowerCase().contains(keyword));
         return outputList;
     }
 }

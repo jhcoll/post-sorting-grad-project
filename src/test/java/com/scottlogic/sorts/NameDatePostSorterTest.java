@@ -29,7 +29,7 @@ class NameDatePostSorterTest {
             OffsetDateTime.of(2020, 1, 1, 6, 30, 0, 0, ZoneOffset.UTC),
             "Another example post.", 2);
 
-    UserPost userPost2020_01_02_0504 = new UserPost("Boris Small",
+    UserPost Small2020_01_02_0504 = new UserPost("Boris Small",
             OffsetDateTime.of(2020, 1, 2, 5, 4, 0, 0, ZoneOffset.UTC),
             "Hello World!", 4);
 
@@ -113,6 +113,22 @@ class NameDatePostSorterTest {
 
         List<UserPost> actual = new NameDatePostSorter(localDatePostSorter, localAuthorPostSorter)
                 .sort(inputList, SortOrder.ASC);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void sort_3ItemsUnSortedDesc_3ItemsSortedDesc() {
+        List<UserPost> inputList = List.of(Smooth2020_02_01_2200, Smooth2020_01_01_0230, Small2021_01_01_1230);
+        List<UserPost> expected = List.of(Smooth2020_02_01_2200, Smooth2020_01_01_0630, Small2021_01_01_1230);
+
+        when(localDatePostSorter.sort(inputList, SortOrder.DESC))
+                .thenReturn(List.of(Small2021_01_01_1230, Smooth2020_02_01_2200, Smooth2020_01_01_0630));
+        when(localAuthorPostSorter.sort(List.of(Small2021_01_01_1230, Smooth2020_02_01_2200, Smooth2020_01_01_0630), SortOrder.DESC))
+                .thenReturn(List.of( Smooth2020_02_01_2200, Smooth2020_01_01_0630, Small2021_01_01_1230));
+
+        List<UserPost> actual = new NameDatePostSorter(localDatePostSorter, localAuthorPostSorter)
+                .sort(inputList, SortOrder.DESC);
 
         assertEquals(expected, actual);
     }

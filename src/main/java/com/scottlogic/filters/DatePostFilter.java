@@ -11,9 +11,9 @@ public class DatePostFilter implements PostFilter {
     private final OffsetDateTime startDate;
     private final OffsetDateTime endDate;
 
-    public DatePostFilter(OffsetDateTime startDateInput, OffsetDateTime endDateInput) {
-        this.startDate = startDateInput;
-        this.endDate = endDateInput;
+    public DatePostFilter(OffsetDateTime startDate, OffsetDateTime endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     @Override
