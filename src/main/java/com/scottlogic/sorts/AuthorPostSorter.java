@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AuthorPostSorter implements PostSorter {
     @Override
@@ -16,11 +17,24 @@ public class AuthorPostSorter implements PostSorter {
             return null;
         }
         List<UserPost> outputList = new ArrayList<>(inputList);
-        if (SortOrder == com.scottlogic.SortOrder.DESC) {
-            outputList.sort(Collections.reverseOrder(Comparator.comparing(a -> a.getAuthor().split(" ")[a.getAuthor().split(" ").length - 1])));
-        } else {
-            outputList.sort(Comparator.comparing(a -> a.getAuthor().split(" ")[a.getAuthor().split(" ").length - 1]));
+
+        switch(SortOrder){
+            case ASC:
+                return outputList
+                        .stream()
+                        .sorted(
+                                Comparator.comparing(a ->
+                                        a.getAuthor().split(" ")[a.getAuthor().split(" ").length - 1]))
+                        .collect(Collectors.toList());
+            case DESC:
+                return outputList
+                        .stream()
+                        .sorted(Collections.reverseOrder(
+                                Comparator.comparing(a ->
+                                        a.getAuthor().split(" ")[a.getAuthor().split(" ").length - 1])))
+                        .collect(Collectors.toList());
+            default:
+                return null;
         }
-        return outputList;
     }
 }

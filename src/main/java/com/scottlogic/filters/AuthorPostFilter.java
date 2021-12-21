@@ -6,6 +6,7 @@ import com.scottlogic.UserPost;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class AuthorPostFilter implements PostFilter {
 
@@ -24,7 +25,9 @@ public class AuthorPostFilter implements PostFilter {
             return new ArrayList<>();
         }
         List<UserPost> outputList = new ArrayList<>(inputList);
-        outputList.removeIf(a -> !a.getAuthor().contains(Author));
-        return outputList;
+        return outputList
+                .stream()
+                .filter(a -> a.getAuthor().contains(Author))
+                .collect(Collectors.toList());
     }
 }

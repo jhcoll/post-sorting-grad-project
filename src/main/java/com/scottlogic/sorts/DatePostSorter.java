@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DatePostSorter implements PostSorter {
     @Override
@@ -16,11 +17,22 @@ public class DatePostSorter implements PostSorter {
             return null;
         }
         List<UserPost> outputList = new ArrayList<>(inputList);
-        if (SortOrder == com.scottlogic.SortOrder.DESC) {
-            outputList.sort(Collections.reverseOrder(Comparator.comparing(UserPost::getDateTime)));
-        } else {
-            outputList.sort(Comparator.comparing(UserPost::getDateTime));
+
+        switch(SortOrder){
+            case ASC:
+                return outputList
+                        .stream()
+                        .sorted(
+                                Comparator.comparing(UserPost::getDateTime))
+                        .collect(Collectors.toList());
+            case DESC:
+                return outputList
+                        .stream()
+                        .sorted(Collections.reverseOrder(
+                                Comparator.comparing(UserPost::getDateTime)))
+                        .collect(Collectors.toList());
+            default:
+                return null;
         }
-        return outputList;
     }
 }

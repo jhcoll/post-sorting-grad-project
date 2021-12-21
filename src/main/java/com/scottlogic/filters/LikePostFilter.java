@@ -5,6 +5,7 @@ import com.scottlogic.UserPost;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LikePostFilter implements PostFilter {
     @Override
@@ -13,7 +14,9 @@ public class LikePostFilter implements PostFilter {
             return null;
         }
         List<UserPost> outputList = new ArrayList<>(inputList);
-        outputList.removeIf(a -> (a.getLikeCount() <= 0));
-        return outputList;
+        return outputList
+                .stream()
+                .filter(a -> (a.getLikeCount() >= 1))
+                .collect(Collectors.toList());
     }
 }
