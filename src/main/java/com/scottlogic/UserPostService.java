@@ -12,15 +12,15 @@ public class UserPostService {
         UserPostService.userPostList = userPostList;
     }
 
-    public static List<UserPost> postSort(PostSorter postSorter, SortOrder sortOrder) {
+    public List<UserPost> postSort(PostSorter postSorter, SortOrder sortOrder) {
         return postSorter.sort(userPostList, sortOrder);
     }
 
-    public static List<UserPost> postFilter(PostFilter postFilter) {
+    public List<UserPost> postFilter(PostFilter postFilter) {
         return postFilter.filter(userPostList);
     }
 
-    public static List<UserPost> filterSorter(PostFilter postFilter, PostSorter postSorter, SortOrder sortOrder) {
+    public List<UserPost> filterSorter(PostFilter postFilter, PostSorter postSorter, SortOrder sortOrder) {
         List<UserPost> outputList = postFilter.filter(userPostList);
         return postSorter.sort(outputList, sortOrder);
     }
