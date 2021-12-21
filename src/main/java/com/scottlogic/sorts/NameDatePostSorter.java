@@ -5,6 +5,7 @@ import com.scottlogic.SortOrder;
 import com.scottlogic.UserPost;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class NameDatePostSorter implements PostSorter {
 
@@ -25,6 +26,6 @@ public class NameDatePostSorter implements PostSorter {
             return null;
         }
         List<UserPost> outputList = DatePostSorter.sort(inputList, SortOrder);
-        return AuthorPostSorter.sort(outputList, SortOrder);
+        return AuthorPostSorter.sort(outputList, SortOrder).stream().collect(Collectors.toList());
     }
 }

@@ -5,6 +5,7 @@ import com.scottlogic.UserPost;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrCombineFilters implements PostFilter {
     final private PostFilter filter1;
@@ -27,9 +28,11 @@ public class OrCombineFilters implements PostFilter {
         List<UserPost> outputList = new ArrayList<>(outputList2);
 
         List<UserPost> duplicateList = new AndCombineFilters(filter1, filter2).filter(inputList);
-        outputList3.removeIf(duplicateList::contains);
 
-        outputList.addAll(outputList3);
+        outputList3
+                .stream()
+                .filter(a -> !duplicateList.contains(a))
+                .forEach(outputList::add);
 
         return outputList;
     }

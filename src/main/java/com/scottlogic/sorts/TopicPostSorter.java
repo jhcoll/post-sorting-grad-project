@@ -5,6 +5,7 @@ import com.scottlogic.SortOrder;
 import com.scottlogic.UserPost;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class TopicPostSorter implements PostSorter {
 
@@ -21,15 +22,24 @@ public class TopicPostSorter implements PostSorter {
             Map<String, Integer> keywordMap = getKeywords(userPost.getContents());
             addToList(keywordMap, userPost);
         }
-        for (Map.Entry<String, List<UserPost>> entry : topicMap.entrySet()) {
-            outputList.addAll(entry.getValue());
-        }
+
         switch(SortOrder){
             case ASC:
-                return outputList;
+                return topicMap
+                        .values()
+                        .stream()
+                        .flatMap(Collection::stream)
+                        .collect(Collectors.toList());
             case DESC:
-                Collections.reverse(outputList);
-                return outputList;
+                return topicMap
+                        .values()
+                        .stream()
+                        .flatMap(Collection::stream)
+                        .collect(Collectors.collectingAndThen(
+                                Collectors.toList(), list ->
+                                {Collections.reverse(list);
+                                    return list;}
+                        ));
             default:
                 return null;
         }

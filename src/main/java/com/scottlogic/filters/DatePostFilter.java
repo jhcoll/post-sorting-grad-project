@@ -6,6 +6,7 @@ import com.scottlogic.UserPost;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DatePostFilter implements PostFilter {
     private final OffsetDateTime startDate;
@@ -22,8 +23,11 @@ public class DatePostFilter implements PostFilter {
             return null;
         }
         List<UserPost> outputList = new ArrayList<>(inputList);
-        outputList.removeIf(a -> (a.getDateTime().compareTo(startDate) <= 0));
-        outputList.removeIf(a -> (a.getDateTime().compareTo(endDate) >= 0));
-        return outputList;
+        return outputList
+                .stream()
+                .filter(a ->
+                        (a.getDateTime().compareTo(startDate) > 0)
+                                && (a.getDateTime().compareTo(endDate) < 0))
+                .collect(Collectors.toList());
     }
 }
