@@ -124,7 +124,7 @@ class UserPostServiceTest {
     }
 
     @Test
-    void orFilter_when() {
+    void orFilter_whenListWithAllItemsWanted_returnListOfAllItemsOrd() {
         List<UserPost> inputList =
                 Arrays.asList(Small2021_01_01_1230_0Likes, Smooth2020_02_01_2200_0Likes, Smooth2020_02_01_2200_3Likes, Biggs2020_01_01_0230_of2_3Likes);
         List<UserPost> expected =
