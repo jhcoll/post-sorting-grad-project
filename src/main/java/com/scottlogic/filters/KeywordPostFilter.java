@@ -1,0 +1,36 @@
+package com.scottlogic.filters;
+
+import com.scottlogic.PostFilter;
+import com.scottlogic.UserPost;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+public class KeywordPostFilter implements PostFilter {
+    private final String keyword;
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public KeywordPostFilter(String keywordInput) {
+        if (keywordInput == null) {
+            throw new IllegalArgumentException("keyword input cannot be null");
+        }
+        this.keyword = keywordInput.toLowerCase();
+    }
+
+    @Override
+    public List<UserPost> filter(List<UserPost> inputList) {
+        if (inputList == null) {
+            return null;
+        }
+        if (Objects.equals(keyword, "")) {
+            return new ArrayList<>();
+        }
+        List<UserPost> outputList = new ArrayList<>(inputList);
+        outputList.removeIf(a -> !a.getContents().toLowerCase().contains(keyword));
+        return outputList;
+    }
+}
