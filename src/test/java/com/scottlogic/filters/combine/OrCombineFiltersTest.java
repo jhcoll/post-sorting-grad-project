@@ -12,7 +12,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -91,7 +92,7 @@ class OrCombineFiltersTest {
 
         when(localAuthorPostFilter.filter(inputList)).thenReturn(Arrays.asList(userPostJane, userPostJoe1));
         when(localDatePostFilter.filter(inputList)).thenReturn(List.of(userPostJane));
-
+        when(localDatePostFilter.filter(Arrays.asList(userPostJane, userPostJoe1))).thenReturn(List.of(userPostJane));
         List<UserPost> actual = new OrCombineFilters(localAuthorPostFilter, localDatePostFilter).filter(inputList);
 
         assertEquals(expected, actual);
@@ -100,7 +101,7 @@ class OrCombineFiltersTest {
     @Test
     void combine_3Items3Match_3ItemList() {
         List<UserPost> inputList = Arrays.asList(userPostJane, userPostJoe1, userPostJoe2);
-        List<UserPost> expected = List.of(userPostJane,userPostJoe1, userPostJoe2);
+        List<UserPost> expected = List.of(userPostJane, userPostJoe1, userPostJoe2);
 
         when(localAuthorPostFilter.filter(inputList))
                 .thenReturn(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2));

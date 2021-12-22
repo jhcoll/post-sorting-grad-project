@@ -9,7 +9,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class KeywordPostFilterTest {
     UserPost userPost_Hello = new UserPost("Jane Smith",
@@ -108,7 +109,7 @@ class KeywordPostFilterTest {
     @Test
     void filter_3Items3Match_3Items() {
         List<UserPost> inputList = Arrays.asList(userPost_example_post2, userPost_Example_Post, userPost_example_post);
-        List<UserPost> expected = Arrays.asList(userPost_example_post2, userPost_Example_Post , userPost_example_post);
+        List<UserPost> expected = Arrays.asList(userPost_example_post2, userPost_Example_Post, userPost_example_post);
 
         List<UserPost> actual = new KeywordPostFilter("post").filter(inputList);
 

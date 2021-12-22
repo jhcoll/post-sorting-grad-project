@@ -2,7 +2,6 @@ package com.scottlogic.sorts;
 
 import com.scottlogic.SortOrder;
 import com.scottlogic.UserPost;
-import com.scottlogic.sorts.LikesPostSorter;
 import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;
@@ -11,7 +10,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class
 LikesPostSorterTest {

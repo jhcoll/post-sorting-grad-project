@@ -51,7 +51,6 @@ class AndCombineFiltersTest {
         List<UserPost> expected = Collections.emptyList();
 
         when(localAuthorPostFilter.filter(inputList)).thenReturn(List.of());
-
         when(localDatePostFilter.filter(List.of())).thenReturn(List.of());
 
         List<UserPost> actual = new AndCombineFilters(localAuthorPostFilter, localDatePostFilter).filter(inputList);
@@ -93,6 +92,10 @@ class AndCombineFiltersTest {
         when(localAuthorPostFilter.filter(inputList)).thenReturn(Arrays.asList(userPostJane, userPostJoe1));
         when(localDatePostFilter.filter(Arrays.asList(userPostJane, userPostJoe1))).thenReturn(List.of(userPostJane));
 
+        //opposite in case of methods being filters being parsed in different orders
+        when(localDatePostFilter.filter(inputList)).thenReturn(List.of(userPostJane));
+        when(localAuthorPostFilter.filter(List.of(userPostJane))).thenReturn(List.of(userPostJane));
+
         List<UserPost> actual = new AndCombineFilters(localAuthorPostFilter, localDatePostFilter).filter(inputList);
 
         assertEquals(expected, actual);
@@ -107,6 +110,12 @@ class AndCombineFiltersTest {
                 .thenReturn(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2));
         when(localDatePostFilter.filter(Arrays.asList(userPostJane, userPostJoe1, userPostJoe2)))
                 .thenReturn(List.of(userPostJane, userPostJoe2));
+
+        //opposite in case of methods being filters being parsed in different orders
+        when(localDatePostFilter.filter(inputList))
+                .thenReturn(List.of(userPostJane, userPostJoe2));
+        when(localAuthorPostFilter.filter(List.of(userPostJane, userPostJoe2)))
+                .thenReturn(Arrays.asList(userPostJane, userPostJoe2));
 
         List<UserPost> actual = new AndCombineFilters(localAuthorPostFilter, localDatePostFilter).filter(inputList);
 

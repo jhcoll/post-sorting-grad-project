@@ -6,15 +6,14 @@ import com.scottlogic.UserPost;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class DatePostFilter implements PostFilter {
     private final OffsetDateTime startDate;
     private final OffsetDateTime endDate;
 
-    public DatePostFilter(OffsetDateTime startDateInput, OffsetDateTime endDateInput) {
-        this.startDate = startDateInput;
-        this.endDate = endDateInput;
+    public DatePostFilter(OffsetDateTime startDate, OffsetDateTime endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     @Override

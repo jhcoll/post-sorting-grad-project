@@ -12,7 +12,9 @@ import java.util.List;
 public class DatePostSorter implements PostSorter {
     @Override
     public List<UserPost> sort(List<UserPost> inputList, SortOrder SortOrder) {
-        if (inputList == null) {return null;}
+        if (inputList == null) {
+            return null;
+        }
         List<UserPost> outputList = new ArrayList<>(inputList);
         if (SortOrder == com.scottlogic.SortOrder.DESC) {
             outputList.sort(Collections.reverseOrder(Comparator.comparing(UserPost::getDateTime)));

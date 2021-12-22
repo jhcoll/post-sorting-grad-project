@@ -9,10 +9,10 @@ import java.util.Objects;
 
 public class AuthorPostFilter implements PostFilter {
 
-    private final String Author;
+    private final String author;
 
-    public AuthorPostFilter(String authorInput) {
-        this.Author = authorInput;
+    public AuthorPostFilter(String author) {
+        this.author = author;
     }
 
     @Override
@@ -20,9 +20,11 @@ public class AuthorPostFilter implements PostFilter {
         if (inputList == null) {
             return null;
         }
-        if(Objects.equals(Author, "")){return new ArrayList<>();}
+        if (Objects.equals(author, "")) {
+            return new ArrayList<>();
+        }
         List<UserPost> outputList = new ArrayList<>(inputList);
-        outputList.removeIf(a -> !a.getAuthor().contains(Author));
+        outputList.removeIf(a -> !a.getAuthor().contains(author));
         return outputList;
     }
 }
