@@ -12,7 +12,7 @@ public class AuthorPostFilter implements PostFilter {
     private final String Author;
 
     public AuthorPostFilter(String authorInput) {
-        Author = authorInput;
+        this.Author = authorInput;
     }
 
     @Override

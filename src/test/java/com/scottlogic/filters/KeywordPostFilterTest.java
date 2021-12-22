@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class KeywordContentPostFilterTest {
+class KeywordPostFilterTest {
     UserPost userPost_Hello = new UserPost("Jane Smith",
             OffsetDateTime.of(2020, 1, 3, 7, 12, 3, 0, ZoneOffset.UTC),
             "Hello World!", 2);
@@ -30,7 +30,7 @@ class KeywordContentPostFilterTest {
 
     @Test
     void filter_null_null() {
-        List<UserPost> actual = new KeywordContentPostFilter("").filter(null);
+        List<UserPost> actual = new KeywordPostFilter("").filter(null);
 
         assertNull(actual);
     }
@@ -40,7 +40,7 @@ class KeywordContentPostFilterTest {
         List<UserPost> inputList = Collections.emptyList();
         List<UserPost> expected = Collections.emptyList();
 
-        List<UserPost> actual = new KeywordContentPostFilter("").filter(inputList);
+        List<UserPost> actual = new KeywordPostFilter("").filter(inputList);
 
         assertEquals(expected, actual);
     }
@@ -50,7 +50,7 @@ class KeywordContentPostFilterTest {
         List<UserPost> inputList = List.of(userPost_Hello);
         List<UserPost> expected = List.of(userPost_Hello);
 
-        List<UserPost> actual = new KeywordContentPostFilter("Hello").filter(inputList);
+        List<UserPost> actual = new KeywordPostFilter("Hello").filter(inputList);
 
         assertEquals(expected, actual);
     }
@@ -60,7 +60,7 @@ class KeywordContentPostFilterTest {
         List<UserPost> inputList = List.of(userPost_Hello);
         List<UserPost> expected = List.of();
 
-        List<UserPost> actual = new KeywordContentPostFilter("Test").filter(inputList);
+        List<UserPost> actual = new KeywordPostFilter("Test").filter(inputList);
 
         assertEquals(expected, actual);
     }
@@ -70,7 +70,7 @@ class KeywordContentPostFilterTest {
         List<UserPost> inputList = Arrays.asList(userPost_Hello, userPost_Example_Post, userPost_example_post);
         List<UserPost> expected = Collections.emptyList();
 
-        List<UserPost> actual = new KeywordContentPostFilter("").filter(inputList);
+        List<UserPost> actual = new KeywordPostFilter("").filter(inputList);
 
         assertEquals(expected, actual);
     }
@@ -80,7 +80,7 @@ class KeywordContentPostFilterTest {
         List<UserPost> inputList = Arrays.asList(userPost_Hello, userPost_Example_Post, userPost_example_post);
         List<UserPost> expected = Collections.emptyList();
 
-        List<UserPost> actual = new KeywordContentPostFilter("Test").filter(inputList);
+        List<UserPost> actual = new KeywordPostFilter("Test").filter(inputList);
 
         assertEquals(expected, actual);
     }
@@ -90,7 +90,7 @@ class KeywordContentPostFilterTest {
         List<UserPost> inputList = Arrays.asList(userPost_Hello, userPost_Example_Post, userPost_example_post);
         List<UserPost> expected = List.of(userPost_Hello);
 
-        List<UserPost> actual = new KeywordContentPostFilter("Hello").filter(inputList);
+        List<UserPost> actual = new KeywordPostFilter("Hello").filter(inputList);
 
         assertEquals(expected, actual);
     }
@@ -100,7 +100,7 @@ class KeywordContentPostFilterTest {
         List<UserPost> inputList = Arrays.asList(userPost_Hello, userPost_Example_Post, userPost_example_post);
         List<UserPost> expected = Arrays.asList(userPost_Example_Post, userPost_example_post);
 
-        List<UserPost> actual = new KeywordContentPostFilter("post").filter(inputList);
+        List<UserPost> actual = new KeywordPostFilter("post").filter(inputList);
 
         assertEquals(expected, actual);
     }
@@ -110,7 +110,7 @@ class KeywordContentPostFilterTest {
         List<UserPost> inputList = Arrays.asList(userPost_example_post2, userPost_Example_Post, userPost_example_post);
         List<UserPost> expected = Arrays.asList(userPost_example_post2, userPost_Example_Post , userPost_example_post);
 
-        List<UserPost> actual = new KeywordContentPostFilter("post").filter(inputList);
+        List<UserPost> actual = new KeywordPostFilter("post").filter(inputList);
 
         assertEquals(expected, actual);
     }

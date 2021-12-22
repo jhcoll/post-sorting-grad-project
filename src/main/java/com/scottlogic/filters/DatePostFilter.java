@@ -13,8 +13,8 @@ public class DatePostFilter implements PostFilter {
     private final OffsetDateTime endDate;
 
     public DatePostFilter(OffsetDateTime startDateInput, OffsetDateTime endDateInput) {
-        startDate = startDateInput;
-        endDate = endDateInput;
+        this.startDate = startDateInput;
+        this.endDate = endDateInput;
     }
 
     @Override
@@ -23,8 +23,8 @@ public class DatePostFilter implements PostFilter {
             return null;
         }
         List<UserPost> outputList = new ArrayList<>(inputList);
-        outputList.removeIf(a -> !(a.getDateTime().compareTo(startDate) > 0));
-        outputList.removeIf(a -> !(a.getDateTime().compareTo(endDate) < 0));
+        outputList.removeIf(a -> (a.getDateTime().compareTo(startDate) <= 0));
+        outputList.removeIf(a -> (a.getDateTime().compareTo(endDate) >= 0));
         return outputList;
     }
 }
